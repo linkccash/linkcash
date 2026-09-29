@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CASHLICK - Login</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+  min-height:100vh;
+  background:#050505;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.login-box{
+  width:100%;
+  max-width:390px;
+  background:#101010;
+  border:1px solid #292929;
+  border-radius:24px;
+  padding:28px 20px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+
+.logo{
+  width:58px;
+  height:58px;
+  margin:0 auto 13px;
+  border-radius:17px;
+  background:linear-gradient(145deg,#ffe082,#d4a72c,#8f6b12);
+  color:#050505;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:19px;
+  font-weight:900;
+}
+
+.brand{
+  text-align:center;
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:3px;
+}
+
+.subtitle{
+  text-align:center;
+  color:#777;
+  font-size:10px;
+  margin-top:5px;
+}
+
+.form{
+  margin-top:28px;
+}
+
+label{
+  display:block;
+  color:#aaa;
+  font-size:10px;
+  margin:0 0 7px 2px;
+}
+
+.input{
+  width:100%;
+  height:48px;
+  background:#070707;
+  border:1px solid #292929;
+  border-radius:12px;
+  color:#fff;
+  outline:none;
+  padding:0 13px;
+  font-size:12px;
+  margin-bottom:15px;
+}
+
+.input:focus{
+  border-color:#d4a72c;
+}
+
+.password-wrap{
+  position:relative;
+}
+
+.password-wrap .input{
+  padding-right:55px;
+}
+
+.show-password{
+  position:absolute;
+  right:8px;
+  top:0;
+  width:45px;
+  height:48px;
+  background:none;
+  border:none;
+  color:#777;
+  cursor:pointer;
+  font-size:11px;
+}
+
+.login-btn{
+  width:100%;
+  height:49px;
+  border:0;
+  border-radius:12px;
+  margin-top:5px;
+  background:linear-gradient(135deg,#ffe082,#d4a72c,#a77b17);
+  color:#070707;
+  font-size:12px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.register{
+  text-align:center;
+  margin-top:20px;
+  color:#666;
+  font-size:10px;
+}
+
+.register a{
+  color:#d4a72c;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+.message{
+  display:none;
+  margin-top:13px;
+  padding:11px;
+  border-radius:10px;
+  text-align:center;
+  font-size:10px;
+}
+
+.message.show{
+  display:block;
+}
+
+.error{
+  color:#ff7777;
+  background:#180909;
+  border:1px solid #392222;
+}
+
+.success{
+  color:#62df91;
+  background:#09180f;
+  border:1px solid #1d4a2d;
+}
+
+.footer{
+  text-align:center;
+  color:#444;
+  font-size:9px;
+  margin-top:22px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+  <div class="logo">CL</div>
+
+  <div class="brand">CASHLICK</div>
+
+  <div class="subtitle">
+    AFFILIATE MARKETING PLATFORM
+  </div>
+
+  <form class="form" id="loginForm">
+
+    <label>USERNAME</label>
+
+    <input
+      class="input"
+      id="username"
+      type="text"
+      placeholder="Enter username"
+      autocomplete="username"
+      required
+    >
+
+    <label>PASSWORD</label>
+
+    <div class="password-wrap">
+
+      <input
+        class="input"
+        id="password"
+        type="password"
+        placeholder="Enter password"
+        autocomplete="current-password"
+        required
+      >
+
+      <button
+        type="button"
+        class="show-password"
+        onclick="togglePassword()"
+      >
+        SHOW
+      </button>
+
+    </div>
+
+    <button
+      type="submit"
+      class="login-btn"
+    >
+      LOG IN
+    </button>
+
+    <div
+      id="message"
+      class="message"
+    ></div>
+
+  </form>
+
+  <div class="register">
+    Don't have an account?
+    <a href="register.html">Create Account</a>
+  </div>
+
+  <div class="footer">
+    © 2026 CASHLICK
+  </div>
+
+</div>
+
+<script>
+
+/*
+==================================================
+CASHLICK CEO LOGIN
+CEO credentials
+Username: Ceo
+Password: Ceo@12345
+==================================================
+*/
+
+const CEO_USERNAME = "Ceo";
+const CEO_PASSWORD = "Ceo@12345";
+
+
+/*
+==================================================
+MESSAGE
+==================================================
+*/
+
+function showMessage(text,type){
+
+  const box =
+    document.getElementById("message");
+
+  box.textContent = text;
+
+  box.className =
+    "message show " + type;
+
+}
+
+
+/*
+==================================================
+PASSWORD
+==================================================
+*/
+
+function togglePassword(){
+
+  const input =
+    document.getElementById("password");
+
+  const button =
+    document.querySelector(".show-password");
+
+  if(input.type === "password"){
+
+    input.type = "text";
+    button.textContent = "HIDE";
+
+  }else{
+
+    input.type = "password";
+    button.textContent = "SHOW";
+
+  }
+
+}
+
+
+/*
+==================================================
+ACCOUNT STORAGE
+==================================================
+*/
+
+function getAccounts(){
+
+  try{
+
+    const data =
+      localStorage.getItem("cashlickAccounts");
+
+    if(!data){
+      return [];
+    }
+
+    const accounts =
+      JSON.parse(data);
+
+    return Array.isArray(accounts)
+      ? accounts
+      : [];
+
+  }catch(error){
+
+    return [];
+
+  }
+
+}
+
+
+/*
+==================================================
+LOGIN
+==================================================
+*/
+
+document
+.getElementById("loginForm")
+.addEventListener("submit",function(event){
+
+  event.preventDefault();
+
+  const username =
+    document
+    .getElementById("username")
+    .value
+    .trim();
+
+  const password =
+    document
+    .getElementById("password")
+    .value;
+
+
+  /*
+  ================================================
+  CEO LOGIN
+  ================================================
+  */
+
+  if(
+    username.toLowerCase() ===
+    CEO_USERNAME.toLowerCase() &&
+    password === CEO_PASSWORD
+  ){
+
+    localStorage.setItem(
+      "cashlickCEOLoggedIn",
+      "true"
+    );
+
+    localStorage.setItem(
+      "cashlickLoggedIn",
+      "true"
+    );
+
+    localStorage.setItem(
+      "cashlickLoggedInUser",
+      "Ceo"
+    );
+
+    localStorage.setItem(
+      "cashlickUser",
+      JSON.stringify({
+        username:"Ceo",
+        role:"ceo",
+        status:"active"
+      })
+    );
+
+    showMessage(
+      "CEO LOGIN SUCCESSFUL...",
+      "success"
+    );
+
+    setTimeout(function(){
+
+      window.location.href =
+        "ceo-dashboard.html";
+
+    },700);
+
+    return;
+
+  }
+
+
+  /*
+  ================================================
+  NORMAL USER LOGIN
+  ================================================
+  */
+
+  const accounts =
+    getAccounts();
+
+  const user =
+    accounts.find(function(account){
+
+      return String(
+        account.username || ""
+      ).toLowerCase() ===
+      username.toLowerCase();
+
+    });
+
+
+  if(!user){
+
+    showMessage(
+      "Account not found.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(
+    String(user.password || "") !==
+    String(password)
+  ){
+
+    showMessage(
+      "Incorrect password.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const status =
+    String(
+      user.status || "pending"
+    ).toLowerCase();
+
+
+  /*
+  ================================================
+  PENDING USER
+  ================================================
+  */
+
+  if(
+    status === "pending"
+  ){
+
+    localStorage.setItem(
+      "cashlickUser",
+      JSON.stringify(user)
+    );
+
+    localStorage.setItem(
+      "cashlickLoggedIn",
+      "true"
+    );
+
+    localStorage.setItem(
+      "cashlickLoggedInUser",
+      user.username
+    );
+
+    window.location.href =
+      "pending-dashboard.html";
+
+    return;
+
+  }
+
+
+  /*
+  ================================================
+  REJECTED USER
+  ================================================
+  */
+
+  if(
+    status === "rejected"
+  ){
+
+    showMessage(
+      "Your account has been rejected.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  /*
+  ================================================
+  ACTIVE USER
+  ================================================
+  */
+
+  if(
+    status === "active" ||
+    status === "activated"
+  ){
+
+    localStorage.setItem(
+      "cashlickUser",
+      JSON.stringify(user)
+    );
+
+    localStorage.setItem(
+      "cashlickLoggedIn",
+      "true"
+    );
+
+    localStorage.setItem(
+      "cashlickLoggedInUser",
+      user.username
+    );
+
+    showMessage(
+      "LOGIN SUCCESSFUL...",
+      "success"
+    );
+
+    setTimeout(function(){
+
+      window.location.href =
+        "dashboard.html";
+
+    },700);
+
+    return;
+
+  }
+
+
+  /*
+  ================================================
+  DEFAULT
+  ================================================
+  */
+
+  showMessage(
+    "Account status is not valid.",
+    "error"
+  );
+
+});
+
+
+/*
+==================================================
+AUTO CHECK
+==================================================
+*/
+
+(function(){
+
+  const ceoLogged =
+    localStorage.getItem(
+      "cashlickCEOLoggedIn"
+    );
+
+  if(ceoLogged === "true"){
+
+    /*
+    CEO can remain on login page,
+    but normal reload will not force redirect.
+    */
+
+  }
+
+})();
+
+</script>
+
+</body>
+</html>
