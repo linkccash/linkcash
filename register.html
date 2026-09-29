@@ -1,542 +1,346 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0"><title>CASHLICK - Create Account</title><style>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>CASHLICK - Register</title>
+
+<style>
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:Arial,Helvetica,sans-serif;
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-    min-height:100vh;
-    background:#050505;
-    color:#fff;
-    padding:20px 15px 40px;
+min-height:100vh;
+background:#050505;
+color:#fff;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
 }
 
-.container{
-    width:100%;
-    max-width:430px;
-    margin:auto;
-}
-
-.top{
-    text-align:center;
-    padding-top:15px;
+.register-box{
+width:100%;
+max-width:400px;
+background:#101010;
+border:1px solid #292929;
+border-radius:24px;
+padding:25px 20px;
+box-shadow:0 20px 60px rgba(0,0,0,.5);
 }
 
 .logo{
-    width:65px;
-    height:65px;
-    margin:auto;
-    border-radius:19px;
-    background:linear-gradient(
-        145deg,
-        #ffe082,
-        #d4a72c,
-        #8f6b12
-    );
-    color:#080808;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:21px;
-    font-weight:900;
+width:58px;
+height:58px;
+margin:0 auto 12px;
+border-radius:17px;
+background:linear-gradient(145deg,#ffe082,#d4a72c,#8f6b12);
+color:#050505;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:900;
+font-size:19px;
 }
 
 .brand{
-    margin-top:12px;
-    font-size:25px;
-    font-weight:900;
-    letter-spacing:3px;
+text-align:center;
+font-size:24px;
+font-weight:900;
+letter-spacing:3px;
 }
 
 .subtitle{
-    margin-top:5px;
-    color:#777;
-    font-size:10px;
+text-align:center;
+color:#777;
+font-size:10px;
+margin-top:5px;
 }
 
-.card{
-    margin-top:25px;
-    background:#101010;
-    border:1px solid #292929;
-    border-radius:21px;
-    padding:20px;
-}
-
-.card h1{
-    font-size:20px;
-}
-
-.card-desc{
-    margin-top:6px;
-    color:#777;
-    font-size:10px;
-    line-height:1.5;
-}
-
-.field{
-    margin-top:15px;
+.form{
+margin-top:24px;
 }
 
 label{
-    display:block;
-    color:#aaa;
-    font-size:10px;
-    font-weight:bold;
-    margin-bottom:7px;
+display:block;
+font-size:10px;
+color:#aaa;
+margin:0 0 7px 2px;
 }
 
-input{
-    width:100%;
-    height:46px;
-    background:#070707;
-    border:1px solid #292929;
-    border-radius:11px;
-    color:#fff;
-    padding:0 12px;
-    outline:none;
-    font-size:11px;
+.input{
+width:100%;
+height:47px;
+background:#070707;
+border:1px solid #292929;
+border-radius:11px;
+color:#fff;
+padding:0 12px;
+font-size:12px;
+outline:none;
+margin-bottom:14px;
 }
 
-input:focus{
-    border-color:#d4a72c;
-}
-
-input::placeholder{
-    color:#555;
-}
-
-.ref-box{
-    margin-top:15px;
-    padding:12px;
-    border:1px solid #3a3018;
-    background:rgba(212,167,44,.06);
-    border-radius:11px;
-    display:none;
-}
-
-.ref-title{
-    color:#d4a72c;
-    font-size:9px;
-    font-weight:bold;
-}
-
-.ref-user{
-    margin-top:5px;
-    color:#ddd;
-    font-size:11px;
-    font-weight:bold;
+.input:focus{
+border-color:#d4a72c;
 }
 
 .password-wrap{
-    position:relative;
+position:relative;
 }
 
-.password-wrap input{
-    padding-right:65px;
+.password-wrap .input{
+padding-right:55px;
 }
 
-.show-password{
-    position:absolute;
-    right:8px;
-    top:7px;
-    height:32px;
-    padding:0 9px;
-    background:#171717;
-    border:1px solid #292929;
-    border-radius:8px;
-    color:#d4a72c;
-    font-size:8px;
-    font-weight:bold;
-    cursor:pointer;
+.show{
+position:absolute;
+right:7px;
+top:0;
+height:47px;
+width:45px;
+border:none;
+background:none;
+color:#777;
+font-size:9px;
+cursor:pointer;
 }
 
-.create-btn{
-    width:100%;
-    height:49px;
-    margin-top:20px;
-    border:none;
-    border-radius:12px;
-    background:linear-gradient(
-        135deg,
-        #ffe082,
-        #d4a72c,
-        #a77b17
-    );
-    color:#080808;
-    font-size:11px;
-    font-weight:900;
-    cursor:pointer;
+.register-btn{
+width:100%;
+height:49px;
+border:none;
+border-radius:12px;
+background:linear-gradient(135deg,#ffe082,#d4a72c,#a77b17);
+color:#080808;
+font-size:12px;
+font-weight:900;
+cursor:pointer;
+margin-top:4px;
 }
 
-.create-btn:disabled{
-    opacity:.55;
+.login{
+text-align:center;
+margin-top:18px;
+font-size:10px;
+color:#666;
 }
 
-.login-text{
-    text-align:center;
-    margin-top:18px;
-    color:#666;
-    font-size:10px;
-}
-
-.login-link{
-    color:#d4a72c;
-    font-weight:bold;
-    cursor:pointer;
+.login a{
+color:#d4a72c;
+text-decoration:none;
+font-weight:bold;
 }
 
 .message{
-    display:none;
-    margin-top:13px;
-    padding:12px;
-    border-radius:10px;
-    font-size:10px;
-    line-height:1.4;
+display:none;
+margin-top:12px;
+padding:11px;
+border-radius:10px;
+text-align:center;
+font-size:10px;
 }
 
 .message.show{
-    display:block;
+display:block;
 }
 
-.message.error{
-    color:#ff7777;
-    background:#160909;
-    border:1px solid #392222;
+.error{
+color:#ff7777;
+background:#180909;
+border:1px solid #392222;
 }
 
-.message.success{
-    color:#62df91;
-    background:#08160d;
-    border:1px solid #1c442b;
+.success{
+color:#62df91;
+background:#09180f;
+border:1px solid #1d4a2d;
 }
 
-.note{
-    margin-top:18px;
-    text-align:center;
-    color:#444;
-    font-size:8px;
-    line-height:1.5;
+.footer{
+text-align:center;
+color:#444;
+font-size:9px;
+margin-top:20px;
 }
+</style>
+</head>
 
-@media(max-width:360px){
-    .card{
-        padding:16px;
-    }
-}
-</style></head><body><div class="container"><div class="top">
+<body>
 
-    <div class="logo">
-        CL
-    </div>
+<div class="register-box">
 
-    <div class="brand">
-        CASHLICK
-    </div>
+<div class="logo">CL</div>
 
-    <div class="subtitle">
-        CREATE YOUR ACCOUNT
-    </div>
+<div class="brand">CASHLICK</div>
+
+<div class="subtitle">
+AFFILIATE MARKETING PLATFORM
+</div>
+
+<form
+class="form"
+id="registerForm"
+>
+
+<label>USERNAME</label>
+
+<input
+class="input"
+id="username"
+type="text"
+placeholder="Choose username"
+required
+>
+
+<label>FULL NAME</label>
+
+<input
+class="input"
+id="fullname"
+type="text"
+placeholder="Enter full name"
+required
+>
+
+<label>PHONE NUMBER</label>
+
+<input
+class="input"
+id="phone"
+type="tel"
+placeholder="Enter phone number"
+required
+>
+
+<label>PASSWORD</label>
+
+<div class="password-wrap">
+
+<input
+class="input"
+id="password"
+type="password"
+placeholder="Create password"
+required
+>
+
+<button
+type="button"
+class="show"
+onclick="togglePassword('password',this)"
+>
+SHOW
+</button>
 
 </div>
 
+<label>CONFIRM PASSWORD</label>
 
-<div class="card">
+<div class="password-wrap">
 
-    <h1>
-        Create Account
-    </h1>
+<input
+class="input"
+id="confirmPassword"
+type="password"
+placeholder="Confirm password"
+required
+>
 
-    <div class="card-desc">
-        Register your CASHLICK account and start
-        building your referral team.
-    </div>
-
-
-    <!-- REFERRER -->
-
-    <div
-        class="ref-box"
-        id="refBox">
-
-        <div class="ref-title">
-            REFERRED BY
-        </div>
-
-        <div
-            class="ref-user"
-            id="refUser">
-            -
-        </div>
-
-    </div>
-
-
-    <!-- FULL NAME -->
-
-    <div class="field">
-
-        <label>
-            FULL NAME
-        </label>
-
-        <input
-            type="text"
-            id="fullname"
-            placeholder="Enter your full name"
-            autocomplete="name"
-        >
-
-    </div>
-
-
-    <!-- USERNAME -->
-
-    <div class="field">
-
-        <label>
-            USERNAME
-        </label>
-
-        <input
-            type="text"
-            id="username"
-            placeholder="Choose a username"
-            autocomplete="username"
-        >
-
-    </div>
-
-
-    <!-- PHONE -->
-
-    <div class="field">
-
-        <label>
-            PHONE NUMBER
-        </label>
-
-        <input
-            type="tel"
-            id="phone"
-            placeholder="Enter phone number"
-            autocomplete="tel"
-        >
-
-    </div>
-
-
-    <!-- PASSWORD -->
-
-    <div class="field">
-
-        <label>
-            PASSWORD
-        </label>
-
-        <div class="password-wrap">
-
-            <input
-                type="password"
-                id="password"
-                placeholder="Create password"
-                autocomplete="new-password"
-            >
-
-            <button
-                type="button"
-                class="show-password"
-                onclick="togglePassword()">
-                SHOW
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- CONFIRM PASSWORD -->
-
-    <div class="field">
-
-        <label>
-            CONFIRM PASSWORD
-        </label>
-
-        <input
-            type="password"
-            id="confirmPassword"
-            placeholder="Confirm password"
-            autocomplete="new-password"
-        >
-
-    </div>
-
-
-    <div
-        class="message"
-        id="message">
-    </div>
-
-
-    <button
-        class="create-btn"
-        id="createBtn"
-        onclick="createAccount()">
-
-        CREATE ACCOUNT
-
-    </button>
-
-
-    <div class="login-text">
-
-        Already have an account?
-
-        <span
-            class="login-link"
-            onclick="goLogin()">
-            LOGIN
-        </span>
-
-    </div>
-
-
-    <div class="note">
-        By creating an account, you agree to use
-        CASHLICK according to its platform rules.
-    </div>
+<button
+type="button"
+class="show"
+onclick="togglePassword('confirmPassword',this)"
+>
+SHOW
+</button>
 
 </div>
 
-</div><script>
+<button
+class="register-btn"
+type="submit"
+>
+CREATE ACCOUNT
+</button>
+
+<div
+class="message"
+id="message"
+></div>
+
+</form>
+
+<div class="login">
+Already have an account?
+<a href="login.html">Log In</a>
+</div>
+
+<div class="footer">
+© 2026 CASHLICK
+</div>
+
+</div>
+
+<script>
 
 /* =========================================
-   STORAGE KEY
+   GET REFERRER FROM LINK
 ========================================= */
 
-const ACCOUNTS_KEY="cashlickAccounts";
+const urlParams =
+new URLSearchParams(
+window.location.search
+);
+
+const referral =
+urlParams.get("ref") || "";
 
 
 /* =========================================
-   GET ACCOUNTS
+   ACCOUNTS
 ========================================= */
 
 function getAccounts(){
 
-    try{
+try{
 
-        const saved=
-            localStorage.getItem(ACCOUNTS_KEY);
+const saved =
+localStorage.getItem(
+"cashlickAccounts"
+);
 
-        if(!saved){
-            return [];
-        }
+if(!saved){
+return [];
+}
 
-        const accounts=
-            JSON.parse(saved);
+const accounts =
+JSON.parse(saved);
 
-        return Array.isArray(accounts)
-            ?accounts
-            :[];
+return Array.isArray(accounts)
+?accounts
+:[];
 
-    }catch(error){
+}catch(error){
 
-        return [];
-
-    }
+return [];
 
 }
 
+}
 
-/* =========================================
-   SAVE ACCOUNTS
-========================================= */
 
 function saveAccounts(accounts){
 
-    localStorage.setItem(
-        ACCOUNTS_KEY,
-        JSON.stringify(accounts)
-    );
-
-}
-
-
-/* =========================================
-   REFERRER FROM URL
-========================================= */
-
-function getReferralUsername(){
-
-    const params=
-        new URLSearchParams(
-            window.location.search
-        );
-
-    return (
-        params.get("ref") ||
-        ""
-    ).trim();
-
-}
-
-
-/* =========================================
-   NORMALIZE USERNAME
-========================================= */
-
-function normalizeUsername(value){
-
-    return String(value || "")
-        .trim()
-        .toLowerCase();
-
-}
-
-
-/* =========================================
-   SHOW REFERRER
-========================================= */
-
-function loadReferral(){
-
-    const ref=
-        getReferralUsername();
-
-    if(!ref){
-        return;
-    }
-
-    const accounts=
-        getAccounts();
-
-    const referrer=
-        accounts.find(function(user){
-
-            return normalizeUsername(
-                user.username
-            )===
-            normalizeUsername(ref);
-
-        });
-
-    if(!referrer){
-        return;
-    }
-
-    document.getElementById(
-        "refBox"
-    ).style.display="block";
-
-    document.getElementById(
-        "refUser"
-    ).textContent=
-        referrer.username;
+localStorage.setItem(
+"cashlickAccounts",
+JSON.stringify(accounts)
+);
 
 }
 
@@ -546,318 +350,20 @@ function loadReferral(){
 ========================================= */
 
 function showMessage(
-    text,
-    type
+text,
+type
 ){
 
-    const box=
-        document.getElementById(
-            "message"
-        );
-
-    box.textContent=text;
-
-    box.className=
-        "message show "+
-        type;
-
-}
-
-
-/* =========================================
-   CREATE ACCOUNT
-========================================= */
-
-function createAccount(){
-
-    const fullname=
-        document.getElementById(
-            "fullname"
-        ).value.trim();
-
-    const usernameRaw=
-        document.getElementById(
-            "username"
-        ).value.trim();
-
-    const phone=
-        document.getElementById(
-            "phone"
-        ).value.trim();
-
-    const password=
-        document.getElementById(
-            "password"
-        ).value;
-
-    const confirmPassword=
-        document.getElementById(
-            "confirmPassword"
-        ).value;
-
-
-    const username=
-        normalizeUsername(
-            usernameRaw
-        );
-
-
-    /* VALIDATION */
-
-    if(
-        !fullname ||
-        !username ||
-        !phone ||
-        !password ||
-        !confirmPassword
-    ){
-
-        showMessage(
-            "Please fill in all fields.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    if(username.length < 3){
-
-        showMessage(
-            "Username must contain at least 3 characters.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    if(!/^[a-z0-9._-]+$/i.test(username)){
-
-        showMessage(
-            "Username can contain letters, numbers, dot, underscore or dash only.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    if(password.length < 6){
-
-        showMessage(
-            "Password must contain at least 6 characters.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    if(password!==confirmPassword){
-
-        showMessage(
-            "Passwords do not match.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    const accounts=
-        getAccounts();
-
-
-    /* CHECK USERNAME */
-
-    const exists=
-        accounts.some(function(user){
-
-            return normalizeUsername(
-                user.username
-            )===username;
-
-        });
-
-
-    if(exists){
-
-        showMessage(
-            "Username already exists. Please choose another username.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    /* =====================================
-       REFERRER
-    ===================================== */
-
-    const referral=
-        getReferralUsername();
-
-
-    let referredBy="";
-
-
-    if(referral){
-
-        const referrer=
-            accounts.find(function(user){
-
-                return normalizeUsername(
-                    user.username
-                )===
-                normalizeUsername(
-                    referral
-                );
-
-            });
-
-        if(referrer){
-
-            referredBy=
-                referrer.username;
-
-        }
-
-    }
-
-
-    /* =====================================
-       NEW ACCOUNT
-    ===================================== */
-
-    const account={
-
-        id:
-            "CL-"+Date.now()+"-"+
-            Math.random()
-                .toString(36)
-                .substring(2,8),
-
-        fullname:
-            fullname,
-
-        username:
-            username,
-
-        phone:
-            phone,
-
-        password:
-            password,
-
-        referredBy:
-            referredBy,
-
-        status:
-            "pending",
-
-        accountStatus:
-            "pending",
-
-        pending:
-            true,
-
-        activated:
-            false,
-
-        isActivated:
-            false,
-
-        active:
-            false,
-
-        balance:
-            0,
-
-        withdraw:
-            0,
-
-        totalEarnings:
-            0,
-
-        earnings:
-            0,
-
-        commission:
-            0,
-
-        level1Earnings:
-            0,
-
-        level2Earnings:
-            0,
-
-        level3Earnings:
-            0,
-
-        level4Earnings:
-            0,
-
-        commissionHistory:
-            [],
-
-        withdrawalHistory:
-            [],
-
-        createdAt:
-            new Date().toISOString()
-
-    };
-
-
-    /* SAVE */
-
-    accounts.push(account);
-
-    saveAccounts(accounts);
-
-
-    /*
-       Save current registration
-       for pending page.
-    */
-
-    localStorage.setItem(
-        "cashlickUser",
-        JSON.stringify(account)
-    );
-
-
-    localStorage.setItem(
-        "cashlickLoggedInUser",
-        JSON.stringify(account)
-    );
-
-
-    showMessage(
-        "Account created successfully. Opening your account status...",
-        "success"
-    );
-
-
-    document.getElementById(
-        "createBtn"
-    ).disabled=true;
-
-
-    setTimeout(function(){
-
-        window.location.href=
-            "pending.html";
-
-    },800);
+const box =
+document.getElementById(
+"message"
+);
+
+box.textContent =
+text;
+
+box.className =
+"message show " + type;
 
 }
 
@@ -866,58 +372,332 @@ function createAccount(){
    PASSWORD
 ========================================= */
 
-function togglePassword(){
+function togglePassword(
+id,
+button
+){
 
-    const password=
-        document.getElementById(
-            "password"
-        );
+const input =
+document.getElementById(id);
 
-    const button=
-        document.querySelector(
-            ".show-password"
-        );
+if(input.type === "password"){
 
+input.type = "text";
 
-    if(
-        password.type==="password"
-    ){
+button.textContent =
+"HIDE";
 
-        password.type="text";
+}else{
 
-        button.textContent="HIDE";
+input.type = "password";
 
-    }else{
+button.textContent =
+"SHOW";
 
-        password.type="password";
-
-        button.textContent="SHOW";
-
-    }
+}
 
 }
 
 
 /* =========================================
-   LOGIN
+   ID
 ========================================= */
 
-function goLogin(){
+function createID(){
 
-    window.location.href=
-        "login.html";
+return "CL-" +
+Date.now() +
+"-" +
+Math.random()
+.toString(36)
+.substring(2,8)
+.toUpperCase();
 
 }
 
 
 /* =========================================
-   START
+   REGISTER
 ========================================= */
 
-loadReferral();
+document
+.getElementById("registerForm")
+.addEventListener(
+"submit",
+function(event){
 
-</script></body>
+event.preventDefault();
+
+
+const username =
+document.getElementById(
+"username"
+).value.trim();
+
+
+const fullname =
+document.getElementById(
+"fullname"
+).value.trim();
+
+
+const phone =
+document.getElementById(
+"phone"
+).value.trim();
+
+
+const password =
+document.getElementById(
+"password"
+).value;
+
+
+const confirmPassword =
+document.getElementById(
+"confirmPassword"
+).value;
+
+
+/* =========================================
+   VALIDATION
+========================================= */
+
+if(username.length < 3){
+
+showMessage(
+"Username must be at least 3 characters.",
+"error"
+);
+
+return;
+
+}
+
+
+if(fullname.length < 3){
+
+showMessage(
+"Please enter your full name.",
+"error"
+);
+
+return;
+
+}
+
+
+if(phone.length < 7){
+
+showMessage(
+"Please enter a valid phone number.",
+"error"
+);
+
+return;
+
+}
+
+
+if(password.length < 6){
+
+showMessage(
+"Password must be at least 6 characters.",
+"error"
+);
+
+return;
+
+}
+
+
+if(password !== confirmPassword){
+
+showMessage(
+"Passwords do not match.",
+"error"
+);
+
+return;
+
+}
+
+
+/* =========================================
+   GET ACCOUNTS
+========================================= */
+
+const accounts =
+getAccounts();
+
+
+/* =========================================
+   USERNAME CHECK
+========================================= */
+
+const usernameExists =
+accounts.some(function(user){
+
+return String(
+user.username || ""
+)
+.toLowerCase() ===
+username.toLowerCase();
+
+});
+
+
+if(usernameExists){
+
+showMessage(
+"Username already exists.",
+"error"
+);
+
+return;
+
+}
+
+
+/* =========================================
+   PHONE CHECK
+========================================= */
+
+const phoneExists =
+accounts.some(function(user){
+
+return String(
+user.phone || ""
+).trim() === phone;
+
+});
+
+
+if(phoneExists){
+
+showMessage(
+"Phone number already registered.",
+"error"
+);
+
+return;
+
+}
+
+
+/* =========================================
+   CREATE ACCOUNT
+========================================= */
+
+const user = {
+
+id:createID(),
+
+username:username,
+
+fullname:fullname,
+
+fullName:fullname,
+
+phone:phone,
+
+password:password,
+
+status:"pending",
+
+accountStatus:"pending",
+
+activated:false,
+
+isActivated:false,
+
+active:false,
+
+pending:true,
+
+referredBy:referral,
+
+balance:0,
+
+withdraw:0,
+
+earnings:0,
+
+commission:0,
+
+totalEarnings:0,
+
+level1Earnings:0,
+
+level2Earnings:0,
+
+level3Earnings:0,
+
+level4Earnings:0,
+
+referralEarnings:0,
+
+commissionHistory:[],
+
+createdAt:
+new Date().toISOString()
+
+};
+
+
+/* =========================================
+   SAVE
+========================================= */
+
+accounts.push(user);
+
+saveAccounts(accounts);
+
+
+/* =========================================
+   CURRENT USER
+========================================= */
+
+localStorage.setItem(
+"cashlickUser",
+JSON.stringify(user)
+);
+
+localStorage.setItem(
+"cashlickLoggedIn",
+"true"
+);
+
+localStorage.setItem(
+"cashlickLoggedInUser",
+username
+);
+
+
+/* =========================================
+   SUCCESS
+========================================= */
+
+showMessage(
+"Account created successfully.",
+"success"
+);
+
+
+/* =========================================
+   GO PENDING
+========================================= */
+
+setTimeout(function(){
+
+window.location.href =
+"pending-dashboard.html";
+
+},800);
+
+});
+
+</script>
+
+</body>
 </html>
-```Hii ndiyo register.html ya msingi. Muhimu: account mpya inaingia "pending", na "referredBy" inahifadhiwa wakati wa registration ili baadaye Level 1–4 zitumie data hiyo moja kwa moja.
-
-Ukiweka hii, hatua inayofuata ni 3️⃣ "login.html".
