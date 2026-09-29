@@ -124,6 +124,11 @@ cursor:pointer;
 margin-top:4px;
 }
 
+.register-btn:disabled{
+opacity:.6;
+cursor:not-allowed;
+}
+
 .login{
 text-align:center;
 margin-top:18px;
@@ -183,10 +188,7 @@ margin-top:20px;
 AFFILIATE MARKETING PLATFORM
 </div>
 
-<form
-class="form"
-id="registerForm"
->
+<form class="form" id="registerForm">
 
 <label>USERNAME</label>
 
@@ -195,6 +197,7 @@ class="input"
 id="username"
 type="text"
 placeholder="Choose username"
+autocomplete="username"
 required
 >
 
@@ -227,6 +230,7 @@ class="input"
 id="password"
 type="password"
 placeholder="Create password"
+autocomplete="new-password"
 required
 >
 
@@ -249,6 +253,7 @@ class="input"
 id="confirmPassword"
 type="password"
 placeholder="Confirm password"
+autocomplete="new-password"
 required
 >
 
@@ -264,6 +269,7 @@ SHOW
 
 <button
 class="register-btn"
+id="registerBtn"
 type="submit"
 >
 CREATE ACCOUNT
@@ -290,16 +296,14 @@ Already have an account?
 <script>
 
 /* =========================================
-   GET REFERRER FROM LINK
+   REFERRAL
 ========================================= */
 
 const urlParams =
-new URLSearchParams(
-window.location.search
-);
+new URLSearchParams(window.location.search);
 
 const referral =
-urlParams.get("ref") || "";
+(urlParams.get("ref") || "").trim();
 
 
 /* =========================================
@@ -311,20 +315,18 @@ function getAccounts(){
 try{
 
 const saved =
-localStorage.getItem(
-"cashlickAccounts"
-);
+localStorage.getItem("cashlickAccounts");
 
 if(!saved){
 return [];
 }
 
-const accounts =
+const data =
 JSON.parse(saved);
 
-return Array.isArray(accounts)
-?accounts
-:[];
+return Array.isArray(data)
+? data
+: [];
 
 }catch(error){
 
@@ -349,20 +351,14 @@ JSON.stringify(accounts)
    MESSAGE
 ========================================= */
 
-function showMessage(
-text,
-type
-){
+function showMessage(text,type){
 
-const box =
-document.getElementById(
-"message"
-);
+const message =
+document.getElementById("message");
 
-box.textContent =
-text;
+message.textContent = text;
 
-box.className =
+message.className =
 "message show " + type;
 
 }
@@ -372,10 +368,7 @@ box.className =
    PASSWORD
 ========================================= */
 
-function togglePassword(
-id,
-button
-){
+function togglePassword(id,button){
 
 const input =
 document.getElementById(id);
@@ -383,16 +376,12 @@ document.getElementById(id);
 if(input.type === "password"){
 
 input.type = "text";
-
-button.textContent =
-"HIDE";
+button.textContent = "HIDE";
 
 }else{
 
 input.type = "password";
-
-button.textContent =
-"SHOW";
+button.textContent = "SHOW";
 
 }
 
@@ -400,7 +389,7 @@ button.textContent =
 
 
 /* =========================================
-   ID
+   CREATE ID
 ========================================= */
 
 function createID(){
@@ -422,41 +411,48 @@ Math.random()
 
 document
 .getElementById("registerForm")
-.addEventListener(
-"submit",
-function(event){
+.addEventListener("submit",function(event){
 
 event.preventDefault();
 
 
-const username =
-document.getElementById(
-"username"
-).value.trim();
+const button =
+document.getElementById("registerBtn");
 
+button.disabled = true;
+
+
+/* =========================================
+   FORM DATA
+========================================= */
+
+const username =
+document
+.getElementById("username")
+.value
+.trim();
 
 const fullname =
-document.getElementById(
-"fullname"
-).value.trim();
-
+document
+.getElementById("fullname")
+.value
+.trim();
 
 const phone =
-document.getElementById(
-"phone"
-).value.trim();
-
+document
+.getElementById("phone")
+.value
+.trim();
 
 const password =
-document.getElementById(
-"password"
-).value;
-
+document
+.getElementById("password")
+.value;
 
 const confirmPassword =
-document.getElementById(
-"confirmPassword"
-).value;
+document
+.getElementById("confirmPassword")
+.value;
 
 
 /* =========================================
@@ -470,6 +466,7 @@ showMessage(
 "error"
 );
 
+button.disabled=false;
 return;
 
 }
@@ -482,6 +479,7 @@ showMessage(
 "error"
 );
 
+button.disabled=false;
 return;
 
 }
@@ -494,6 +492,7 @@ showMessage(
 "error"
 );
 
+button.disabled=false;
 return;
 
 }
@@ -506,6 +505,7 @@ showMessage(
 "error"
 );
 
+button.disabled=false;
 return;
 
 }
@@ -518,6 +518,7 @@ showMessage(
 "error"
 );
 
+button.disabled=false;
 return;
 
 }
@@ -538,14 +539,12 @@ getAccounts();
 const usernameExists =
 accounts.some(function(user){
 
-return String(
-user.username || ""
-)
-.toLowerCase() ===
+return String(user.username || "")
+.toLowerCase()
+.trim() ===
 username.toLowerCase();
 
 });
-
 
 if(usernameExists){
 
@@ -554,6 +553,7 @@ showMessage(
 "error"
 );
 
+button.disabled=false;
 return;
 
 }
@@ -566,12 +566,11 @@ return;
 const phoneExists =
 accounts.some(function(user){
 
-return String(
-user.phone || ""
-).trim() === phone;
+return String(user.phone || "")
+.trim() ===
+phone;
 
 });
-
 
 if(phoneExists){
 
@@ -580,13 +579,14 @@ showMessage(
 "error"
 );
 
+button.disabled=false;
 return;
 
 }
 
 
 /* =========================================
-   CREATE ACCOUNT
+   CREATE NEW USER
 ========================================= */
 
 const user = {
@@ -603,6 +603,12 @@ phone:phone,
 
 password:password,
 
+/*
+IMPORTANT:
+Every new account starts as PENDING.
+CEO must activate it.
+*/
+
 status:"pending",
 
 accountStatus:"pending",
@@ -615,11 +621,21 @@ active:false,
 
 pending:true,
 
+/*
+REFERRER
+*/
+
 referredBy:referral,
+
+/*
+MONEY
+*/
 
 balance:0,
 
 withdraw:0,
+
+withdrawn:0,
 
 earnings:0,
 
@@ -637,7 +653,17 @@ level4Earnings:0,
 
 referralEarnings:0,
 
+/*
+HISTORY
+*/
+
 commissionHistory:[],
+
+withdrawalHistory:[],
+
+/*
+DATE
+*/
 
 createdAt:
 new Date().toISOString()
@@ -646,7 +672,7 @@ new Date().toISOString()
 
 
 /* =========================================
-   SAVE
+   SAVE ACCOUNT
 ========================================= */
 
 accounts.push(user);
@@ -655,7 +681,7 @@ saveAccounts(accounts);
 
 
 /* =========================================
-   CURRENT USER
+   SAVE CURRENT USER
 ========================================= */
 
 localStorage.setItem(
@@ -679,21 +705,23 @@ username
 ========================================= */
 
 showMessage(
-"Account created successfully.",
+"Account created successfully. Opening pending account...",
 "success"
 );
 
 
-/* =========================================
-   GO PENDING
-========================================= */
+/*
+IMPORTANT:
+Always go directly to pending-dashboard.html.
+*/
 
 setTimeout(function(){
 
-window.location.href =
-"pending-dashboard.html";
+window.location.replace(
+"pending-dashboard.html"
+);
 
-},800);
+},700);
 
 });
 
