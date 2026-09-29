@@ -1,0 +1,2127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>CASHLICK - Dashboard</title>
+
+<style>
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+background:#050505;
+color:#fff;
+min-height:100vh;
+padding-bottom:40px;
+}
+
+.header{
+position:sticky;
+top:0;
+z-index:100;
+background:rgba(5,5,5,.97);
+border-bottom:1px solid #292929;
+padding:13px 15px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.header-left{
+display:flex;
+align-items:center;
+gap:11px;
+}
+
+.logo{
+width:44px;
+height:44px;
+border-radius:13px;
+background:linear-gradient(145deg,#ffe082,#d4a72c,#8f6b12);
+color:#050505;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:900;
+}
+
+.brand{
+font-size:18px;
+font-weight:900;
+letter-spacing:2px;
+}
+
+.sub{
+font-size:9px;
+color:#777;
+margin-top:3px;
+}
+
+.menu{
+width:42px;
+height:42px;
+border:1px solid #292929;
+border-radius:12px;
+background:#101010;
+color:#d4a72c;
+font-size:20px;
+cursor:pointer;
+}
+
+.container{
+width:100%;
+max-width:500px;
+margin:auto;
+padding:19px 15px;
+}
+
+.welcome small{
+color:#777;
+font-size:11px;
+}
+
+.welcome h1{
+font-size:24px;
+margin-top:5px;
+}
+
+.gold{
+color:#d4a72c;
+}
+
+.total-card{
+margin-top:18px;
+background:linear-gradient(145deg,#181818,#0b0b0b);
+border:1px solid #292929;
+border-radius:20px;
+padding:20px;
+}
+
+.label{
+font-size:10px;
+color:#777;
+}
+
+.total{
+font-size:30px;
+font-weight:900;
+margin-top:7px;
+}
+
+.money-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:10px;
+}
+
+.money-box{
+background:#101010;
+border:1px solid #292929;
+border-radius:17px;
+padding:17px 14px;
+}
+
+.money-title{
+font-size:10px;
+color:#777;
+}
+
+.money-value{
+font-size:20px;
+font-weight:900;
+margin-top:7px;
+}
+
+.money-desc{
+font-size:8px;
+color:#555;
+margin-top:5px;
+}
+
+.section{
+margin-top:23px;
+}
+
+.section-title{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:10px;
+}
+
+.section-title h2{
+font-size:15px;
+}
+
+.section-title span{
+font-size:9px;
+color:#666;
+}
+
+.card{
+background:#101010;
+border:1px solid #292929;
+border-radius:18px;
+overflow:hidden;
+}
+
+.team-head{
+padding:16px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+cursor:pointer;
+}
+
+.team-left{
+display:flex;
+align-items:center;
+gap:11px;
+}
+
+.team-icon{
+width:43px;
+height:43px;
+border-radius:13px;
+background:rgba(212,167,44,.09);
+border:1px solid rgba(212,167,44,.2);
+display:flex;
+align-items:center;
+justify-content:center;
+color:#d4a72c;
+font-size:18px;
+}
+
+.team-head h3{
+font-size:12px;
+}
+
+.team-head p{
+font-size:8px;
+color:#666;
+margin-top:4px;
+}
+
+.arrow{
+color:#777;
+font-size:21px;
+transition:.2s;
+}
+
+.team-card.open .arrow{
+transform:rotate(90deg);
+}
+
+.levels{
+display:none;
+padding:9px;
+border-top:1px solid #222;
+}
+
+.team-card.open .levels{
+display:block;
+}
+
+.level{
+background:#080808;
+border:1px solid #242424;
+border-radius:13px;
+margin-bottom:8px;
+overflow:hidden;
+}
+
+.level:last-child{
+margin-bottom:0;
+}
+
+.level-head{
+padding:12px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+cursor:pointer;
+}
+
+.level-left{
+display:flex;
+align-items:center;
+gap:9px;
+}
+
+.level-number{
+width:34px;
+height:34px;
+border-radius:9px;
+background:#171717;
+color:#d4a72c;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:10px;
+font-weight:900;
+}
+
+.level-title{
+font-size:10px;
+font-weight:bold;
+}
+
+.level-desc{
+font-size:8px;
+color:#555;
+margin-top:3px;
+}
+
+.level-arrow{
+color:#777;
+transition:.2s;
+}
+
+.level.open .level-arrow{
+transform:rotate(90deg);
+}
+
+.members{
+display:none;
+border-top:1px solid #222;
+padding:9px;
+overflow-x:auto;
+}
+
+.level.open .members{
+display:block;
+}
+
+.member{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:8px;
+padding:10px 4px;
+border-bottom:1px solid #191919;
+min-width:300px;
+}
+
+.member:last-child{
+border-bottom:none;
+}
+
+.member-name{
+font-size:9px;
+font-weight:bold;
+}
+
+.member-phone{
+font-size:8px;
+color:#555;
+margin-top:3px;
+}
+
+.member-right{
+text-align:right;
+}
+
+.member-status{
+font-size:8px;
+}
+
+.member-earning{
+font-size:8px;
+color:#d4a72c;
+margin-top:3px;
+}
+
+.active{
+color:#62df91;
+}
+
+.pending{
+color:#d4a72c;
+}
+
+.rejected{
+color:#ff7777;
+}
+
+.empty{
+padding:15px;
+text-align:center;
+font-size:9px;
+color:#555;
+}
+
+.earnings{
+background:#101010;
+border:1px solid #292929;
+border-radius:18px;
+overflow:hidden;
+}
+
+.earning-row{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:14px;
+border-bottom:1px solid #222;
+}
+
+.earning-left{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.level-badge{
+width:35px;
+height:35px;
+border-radius:10px;
+background:#181818;
+color:#d4a72c;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:9px;
+font-weight:900;
+}
+
+.earning-title{
+font-size:10px;
+font-weight:bold;
+}
+
+.earning-desc{
+font-size:8px;
+color:#555;
+margin-top:3px;
+}
+
+.earning-value{
+font-size:10px;
+font-weight:900;
+color:#d4a72c;
+}
+
+.earning-total{
+padding:16px;
+display:flex;
+justify-content:space-between;
+background:#090909;
+font-size:10px;
+}
+
+.earning-total strong{
+color:#d4a72c;
+font-size:15px;
+}
+
+.link-box{
+background:#101010;
+border:1px solid #292929;
+border-radius:18px;
+padding:16px;
+}
+
+.link-label{
+font-size:10px;
+color:#777;
+margin-bottom:9px;
+}
+
+.link-row{
+display:flex;
+gap:7px;
+}
+
+.link-input{
+flex:1;
+height:43px;
+background:#070707;
+border:1px solid #292929;
+border-radius:10px;
+color:#d4a72c;
+font-size:9px;
+padding:0 9px;
+outline:none;
+}
+
+.copy{
+width:68px;
+height:43px;
+border:0;
+border-radius:10px;
+background:linear-gradient(135deg,#ffe082,#d4a72c,#a77b17);
+color:#080808;
+font-size:9px;
+font-weight:900;
+cursor:pointer;
+}
+
+.withdraw-card{
+background:#101010;
+border:1px solid #292929;
+border-radius:18px;
+padding:17px;
+}
+
+.withdraw-input{
+width:100%;
+height:44px;
+background:#070707;
+border:1px solid #292929;
+border-radius:10px;
+color:#fff;
+padding:0 11px;
+outline:none;
+font-size:11px;
+margin-top:9px;
+}
+
+.withdraw-btn{
+width:100%;
+height:45px;
+margin-top:9px;
+border:0;
+border-radius:11px;
+background:linear-gradient(135deg,#ffe082,#d4a72c,#a77b17);
+color:#080808;
+font-size:10px;
+font-weight:900;
+cursor:pointer;
+}
+
+.withdraw-note{
+font-size:8px;
+color:#555;
+margin-top:7px;
+line-height:1.5;
+}
+
+.account{
+background:#101010;
+border:1px solid #292929;
+border-radius:18px;
+overflow:hidden;
+}
+
+.account-head{
+padding:16px;
+display:flex;
+justify-content:space-between;
+cursor:pointer;
+}
+
+.account-details{
+display:none;
+border-top:1px solid #222;
+padding:8px 16px;
+}
+
+.account.open .account-details{
+display:block;
+}
+
+.account-row{
+display:flex;
+justify-content:space-between;
+padding:12px 0;
+border-bottom:1px solid #202020;
+}
+
+.account-row:last-child{
+border-bottom:0;
+}
+
+.account-row span:first-child{
+font-size:9px;
+color:#777;
+}
+
+.account-row span:last-child{
+font-size:9px;
+color:#ddd;
+text-align:right;
+}
+
+.logout{
+width:100%;
+height:48px;
+margin-top:20px;
+border:1px solid #3a2222;
+border-radius:13px;
+background:#120909;
+color:#ff7777;
+font-weight:900;
+font-size:10px;
+cursor:pointer;
+}
+
+.toast{
+position:fixed;
+left:15px;
+right:15px;
+bottom:20px;
+background:#171717;
+border:1px solid #3a3018;
+border-radius:12px;
+padding:13px;
+text-align:center;
+font-size:10px;
+color:#d4a72c;
+display:none;
+z-index:999;
+}
+
+.toast.show{
+display:block;
+}
+
+.modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.8);
+display:none;
+align-items:center;
+justify-content:center;
+padding:20px;
+z-index:1000;
+}
+
+.modal.show{
+display:flex;
+}
+
+.modal-box{
+width:100%;
+max-width:380px;
+background:#111;
+border:1px solid #303030;
+border-radius:20px;
+padding:21px;
+}
+
+.modal-box h3{
+font-size:16px;
+text-align:center;
+}
+
+.modal-box p{
+font-size:10px;
+color:#777;
+line-height:1.5;
+text-align:center;
+margin-top:8px;
+}
+
+.modal-buttons{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-top:18px;
+}
+
+.modal-btn{
+height:43px;
+border-radius:10px;
+font-size:10px;
+font-weight:900;
+cursor:pointer;
+}
+
+.cancel{
+background:#181818;
+border:1px solid #292929;
+color:#aaa;
+}
+
+.confirm{
+background:linear-gradient(135deg,#ffe082,#d4a72c,#a77b17);
+border:0;
+color:#080808;
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+<div class="header-left">
+
+<div class="logo">CL</div>
+
+<div>
+<div class="brand">CASHLICK</div>
+<div class="sub">MEMBER DASHBOARD</div>
+</div>
+
+</div>
+
+<button class="menu" onclick="scrollAccount()">⋮</button>
+
+</header>
+
+<main class="container">
+
+<div class="welcome">
+
+<small>Welcome back</small>
+
+<h1>
+Hello, <span class="gold" id="usernameTitle">User</span> 👋
+</h1>
+
+</div>
+
+
+<!-- TOTAL -->
+
+<div class="total-card">
+
+<div class="label">TOTAL EARNINGS</div>
+
+<div class="total">
+<span class="gold">TSh </span>
+<span id="totalEarnings">0</span>
+</div>
+
+</div>
+
+
+<!-- BALANCE / WITHDRAW -->
+
+<div class="money-grid">
+
+<div class="money-box">
+
+<div class="money-title">BALANCE</div>
+
+<div class="money-value">
+<span class="gold">TSh </span>
+<span id="balance">0</span>
+</div>
+
+<div class="money-desc">
+Available balance
+</div>
+
+</div>
+
+
+<div class="money-box">
+
+<div class="money-title">WITHDRAWN</div>
+
+<div class="money-value">
+<span class="gold">TSh </span>
+<span id="withdrawn">0</span>
+</div>
+
+<div class="money-desc">
+Total withdrawn
+</div>
+
+</div>
+
+</div>
+
+
+<!-- MY TEAM -->
+
+<div class="section">
+
+<div class="section-title">
+
+<h2>My Team</h2>
+
+<span>LEVEL 1–4</span>
+
+</div>
+
+<div class="card team-card" id="teamCard">
+
+<div class="team-head" onclick="toggleTeam()">
+
+<div class="team-left">
+
+<div class="team-icon">◎</div>
+
+<div>
+
+<h3>My Team</h3>
+
+<p>
+Tap to view your team
+</p>
+
+</div>
+
+</div>
+
+<div class="arrow">›</div>
+
+</div>
+
+
+<div class="levels">
+
+<!-- LEVEL 1 -->
+
+<div class="level" id="level1">
+
+<div class="level-head" onclick="toggleLevel(1)">
+
+<div class="level-left">
+
+<div class="level-number">L1</div>
+
+<div>
+
+<div class="level-title">LEVEL 1</div>
+
+<div class="level-desc">
+Direct referrals
+</div>
+
+</div>
+
+</div>
+
+<div class="level-arrow">›</div>
+
+</div>
+
+<div class="members">
+<div id="members1"></div>
+</div>
+
+</div>
+
+
+<!-- LEVEL 2 -->
+
+<div class="level" id="level2">
+
+<div class="level-head" onclick="toggleLevel(2)">
+
+<div class="level-left">
+
+<div class="level-number">L2</div>
+
+<div>
+
+<div class="level-title">LEVEL 2</div>
+
+<div class="level-desc">
+Level 1 referrals
+</div>
+
+</div>
+
+</div>
+
+<div class="level-arrow">›</div>
+
+</div>
+
+<div class="members">
+<div id="members2"></div>
+</div>
+
+</div>
+
+
+<!-- LEVEL 3 -->
+
+<div class="level" id="level3">
+
+<div class="level-head" onclick="toggleLevel(3)">
+
+<div class="level-left">
+
+<div class="level-number">L3</div>
+
+<div>
+
+<div class="level-title">LEVEL 3</div>
+
+<div class="level-desc">
+Level 2 referrals
+</div>
+
+</div>
+
+</div>
+
+<div class="level-arrow">›</div>
+
+</div>
+
+<div class="members">
+<div id="members3"></div>
+</div>
+
+</div>
+
+
+<!-- LEVEL 4 -->
+
+<div class="level" id="level4">
+
+<div class="level-head" onclick="toggleLevel(4)">
+
+<div class="level-left">
+
+<div class="level-number">L4</div>
+
+<div>
+
+<div class="level-title">LEVEL 4</div>
+
+<div class="level-desc">
+Level 3 referrals
+</div>
+
+</div>
+
+</div>
+
+<div class="level-arrow">›</div>
+
+</div>
+
+<div class="members">
+<div id="members4"></div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- TEAM EARNINGS -->
+
+<div class="section">
+
+<div class="section-title">
+
+<h2>Team Earnings</h2>
+
+<span>COMMISSION</span>
+
+</div>
+
+<div class="earnings">
+
+<div class="earning-row">
+<div class="earning-left">
+<div class="level-badge">L1</div>
+<div>
+<div class="earning-title">Level 1</div>
+<div class="earning-desc">Direct referrals</div>
+</div>
+</div>
+<div class="earning-value">
+TSh <span id="earn1">0</span>
+</div>
+</div>
+
+
+<div class="earning-row">
+<div class="earning-left">
+<div class="level-badge">L2</div>
+<div>
+<div class="earning-title">Level 2</div>
+<div class="earning-desc">Second level</div>
+</div>
+</div>
+<div class="earning-value">
+TSh <span id="earn2">0</span>
+</div>
+</div>
+
+
+<div class="earning-row">
+<div class="earning-left">
+<div class="level-badge">L3</div>
+<div>
+<div class="earning-title">Level 3</div>
+<div class="earning-desc">Third level</div>
+</div>
+</div>
+<div class="earning-value">
+TSh <span id="earn3">0</span>
+</div>
+</div>
+
+
+<div class="earning-row">
+<div class="earning-left">
+<div class="level-badge">L4</div>
+<div>
+<div class="earning-title">Level 4</div>
+<div class="earning-desc">Fourth level</div>
+</div>
+</div>
+<div class="earning-value">
+TSh <span id="earn4">0</span>
+</div>
+</div>
+
+
+<div class="earning-total">
+
+<span>Total Team Earnings</span>
+
+<strong>
+TSh <span id="teamTotal">0</span>
+</strong>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- REFERRAL LINK -->
+
+<div class="section">
+
+<div class="section-title">
+
+<h2>My Link</h2>
+
+<span>INVITE</span>
+
+</div>
+
+<div class="link-box">
+
+<div class="link-label">
+Your personal referral link
+</div>
+
+<div class="link-row">
+
+<input
+class="link-input"
+id="referralLink"
+readonly
+>
+
+<button
+class="copy"
+onclick="copyLink()">
+COPY
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- WITHDRAW -->
+
+<div class="section">
+
+<div class="section-title">
+
+<h2>Withdraw</h2>
+
+<span>REQUEST</span>
+
+</div>
+
+<div class="withdraw-card">
+
+<div class="label">
+AMOUNT TO WITHDRAW
+</div>
+
+<input
+class="withdraw-input"
+id="withdrawAmount"
+type="number"
+min="1"
+placeholder="Enter amount"
+>
+
+<div class="label" style="margin-top:12px;">
+MOBILE MONEY NUMBER
+</div>
+
+<input
+class="withdraw-input"
+id="withdrawPhone"
+type="tel"
+placeholder="07XXXXXXXX"
+>
+
+<button
+class="withdraw-btn"
+onclick="requestWithdraw()">
+REQUEST WITHDRAWAL
+</button>
+
+<div class="withdraw-note">
+Withdrawal request will be recorded for processing.
+Your available balance will be reduced after the request.
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ACCOUNT -->
+
+<div class="section">
+
+<div class="section-title">
+<h2>Account</h2>
+</div>
+
+<div class="account" id="accountBox">
+
+<div class="account-head" onclick="toggleAccount()">
+
+<div>
+
+<div style="font-size:12px;font-weight:bold;">
+My Account
+</div>
+
+<div style="font-size:8px;color:#666;margin-top:4px;">
+Tap to view account details
+</div>
+
+</div>
+
+<div style="color:#777;font-size:20px;">
+›
+</div>
+
+</div>
+
+
+<div class="account-details">
+
+<div class="account-row">
+<span>Username</span>
+<span id="accountUsername">-</span>
+</div>
+
+<div class="account-row">
+<span>Full Name</span>
+<span id="accountFullname">-</span>
+</div>
+
+<div class="account-row">
+<span>Phone</span>
+<span id="accountPhone">-</span>
+</div>
+
+<div class="account-row">
+<span>Status</span>
+<span id="accountStatus">-</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<button
+class="logout"
+onclick="logout()">
+LOG OUT
+</button>
+
+</main>
+
+
+<div class="toast" id="toast">
+Saved successfully
+</div>
+
+
+<div class="modal" id="modal">
+
+<div class="modal-box">
+
+<h3 id="modalTitle">
+CASHLICK
+</h3>
+
+<p id="modalText">
+Message
+</p>
+
+<div class="modal-buttons">
+
+<button
+class="modal-btn cancel"
+onclick="closeModal()">
+CANCEL
+</button>
+
+<button
+class="modal-btn confirm"
+id="modalConfirm">
+OK
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   DEFAULT COMMISSION
+========================================= */
+
+const DEFAULT_RATES={
+1:7000,
+2:3000,
+3:1500,
+4:1000
+};
+
+
+/* =========================================
+   CURRENT USER
+========================================= */
+
+let account=null;
+
+function loadCurrentUser(){
+
+try{
+
+const saved=
+localStorage.getItem("cashlickUser");
+
+if(saved){
+
+account=JSON.parse(saved);
+
+}
+
+}catch(error){
+
+account=null;
+
+}
+
+if(!account){
+
+window.location.href="login.html";
+
+return false;
+
+}
+
+return true;
+
+}
+
+
+/* =========================================
+   ACCOUNTS
+========================================= */
+
+function getAccounts(){
+
+try{
+
+const saved=
+localStorage.getItem("cashlickAccounts");
+
+if(!saved){
+return [];
+}
+
+const data=JSON.parse(saved);
+
+return Array.isArray(data)?data:[];
+
+}catch(error){
+
+return [];
+
+}
+
+}
+
+
+/* =========================================
+   SETTINGS
+========================================= */
+
+function getRates(){
+
+try{
+
+const saved=
+localStorage.getItem("cashlickSettings");
+
+if(saved){
+
+const settings=JSON.parse(saved);
+
+return {
+1:Number(settings[1] ?? DEFAULT_RATES[1]),
+2:Number(settings[2] ?? DEFAULT_RATES[2]),
+3:Number(settings[3] ?? DEFAULT_RATES[3]),
+4:Number(settings[4] ?? DEFAULT_RATES[4])
+};
+
+}
+
+}catch(error){}
+
+return {...DEFAULT_RATES};
+
+}
+
+
+/* =========================================
+   SYNC CURRENT ACCOUNT
+========================================= */
+
+function syncAccount(){
+
+const accounts=getAccounts();
+
+const found=accounts.find(function(user){
+
+return String(user.id)===
+String(account.id);
+
+});
+
+if(found){
+
+account=found;
+
+localStorage.setItem(
+"cashlickUser",
+JSON.stringify(account)
+);
+
+}
+
+}
+
+
+/* =========================================
+   LEVEL MEMBERS
+========================================= */
+
+function getLevelMembers(username,level){
+
+const accounts=getAccounts();
+
+if(level===1){
+
+return accounts.filter(function(member){
+
+return String(member.referredBy||"")
+.trim()
+.toLowerCase()===
+String(username||"")
+.trim()
+.toLowerCase();
+
+});
+
+}
+
+let previous=
+getLevelMembers(username,1);
+
+for(let i=2;i<=level;i++){
+
+const previousNames=
+previous.map(function(member){
+
+return String(member.username||"")
+.trim()
+.toLowerCase();
+
+});
+
+previous=
+accounts.filter(function(member){
+
+return previousNames.includes(
+String(member.referredBy||"")
+.trim()
+.toLowerCase()
+);
+
+});
+
+}
+
+return previous;
+
+}
+
+
+/* =========================================
+   ACTIVE
+========================================= */
+
+function isActive(user){
+
+const status=
+String(user.status||"")
+.toLowerCase()
+.trim();
+
+return status==="active" ||
+status==="activated";
+
+}
+
+
+/* =========================================
+   MONEY
+========================================= */
+
+function money(value){
+
+return Number(value||0)
+.toLocaleString("en-US");
+
+}
+
+
+/* =========================================
+   CALCULATE
+========================================= */
+
+function calculateEarnings(){
+
+const rates=getRates();
+
+let totals={
+1:0,
+2:0,
+3:0,
+4:0
+};
+
+for(let level=1;level<=4;level++){
+
+const members=
+getLevelMembers(
+account.username,
+level
+);
+
+members.forEach(function(member){
+
+if(isActive(member)){
+
+totals[level]+=
+Number(rates[level]||0);
+
+}
+
+});
+
+}
+
+account.level1Earnings=totals[1];
+account.level2Earnings=totals[2];
+account.level3Earnings=totals[3];
+account.level4Earnings=totals[4];
+
+account.totalEarnings=
+totals[1]+
+totals[2]+
+totals[3]+
+totals[4];
+
+
+/*
+Only initialize balance if missing.
+Do not overwrite a user's reduced
+balance after withdrawal.
+*/
+
+if(typeof account.balance!=="number"){
+
+account.balance=
+account.totalEarnings;
+
+}
+
+if(typeof account.withdrawn!=="number"){
+
+account.withdrawn=0;
+
+}
+
+
+/*
+Save current user.
+*/
+
+saveAccount();
+
+}
+
+
+/* =========================================
+   SAVE ACCOUNT
+========================================= */
+
+function saveAccount(){
+
+localStorage.setItem(
+"cashlickUser",
+JSON.stringify(account)
+);
+
+const accounts=getAccounts();
+
+const index=
+accounts.findIndex(function(user){
+
+return String(user.id)===
+String(account.id);
+
+});
+
+if(index!==-1){
+
+accounts[index]=account;
+
+localStorage.setItem(
+"cashlickAccounts",
+JSON.stringify(accounts)
+);
+
+}
+
+}
+
+
+/* =========================================
+   LOAD LEVEL
+========================================= */
+
+function loadLevel(level){
+
+const container=
+document.getElementById(
+"members"+level
+);
+
+const members=
+getLevelMembers(
+account.username,
+level
+);
+
+const rates=getRates();
+
+if(!members.length){
+
+container.innerHTML=
+'<div class="empty">No members yet</div>';
+
+return;
+
+}
+
+container.innerHTML="";
+
+members.forEach(function(member){
+
+const row=
+document.createElement("div");
+
+row.className="member";
+
+const status=
+String(member.status||"pending")
+.toLowerCase()
+.trim();
+
+let statusClass="pending";
+
+if(isActive(member)){
+
+statusClass="active";
+
+}
+
+if(status==="rejected"){
+
+statusClass="rejected";
+
+}
+
+const amount=
+isActive(member)
+?Number(rates[level]||0)
+:0;
+
+row.innerHTML=`
+
+<div>
+
+<div class="member-name">
+${escapeHTML(member.username||"-")}
+</div>
+
+<div class="member-phone">
+${escapeHTML(member.phone||"-")}
+</div>
+
+</div>
+
+<div class="member-right">
+
+<div class="member-status ${statusClass}">
+${status.toUpperCase()}
+</div>
+
+<div class="member-earning">
+TSh ${money(amount)}
+</div>
+
+</div>
+
+`;
+
+container.appendChild(row);
+
+});
+
+}
+
+
+/* =========================================
+   DASHBOARD
+========================================= */
+
+function loadDashboard(){
+
+if(!loadCurrentUser()){
+return;
+}
+
+syncAccount();
+
+calculateEarnings();
+
+document.getElementById(
+"usernameTitle"
+).textContent=
+account.username||"User";
+
+document.getElementById(
+"totalEarnings"
+).textContent=
+money(account.totalEarnings);
+
+document.getElementById(
+"balance"
+).textContent=
+money(account.balance);
+
+document.getElementById(
+"withdrawn"
+).textContent=
+money(account.withdrawn);
+
+document.getElementById(
+"earn1"
+).textContent=
+money(account.level1Earnings);
+
+document.getElementById(
+"earn2"
+).textContent=
+money(account.level2Earnings);
+
+document.getElementById(
+"earn3"
+).textContent=
+money(account.level3Earnings);
+
+document.getElementById(
+"earn4"
+).textContent=
+money(account.level4Earnings);
+
+document.getElementById(
+"teamTotal"
+).textContent=
+money(account.totalEarnings);
+
+document.getElementById(
+"accountUsername"
+).textContent=
+account.username||"-";
+
+document.getElementById(
+"accountFullname"
+).textContent=
+account.fullname||
+account.fullName||
+"-";
+
+document.getElementById(
+"accountPhone"
+).textContent=
+account.phone||"-";
+
+document.getElementById(
+"accountStatus"
+).textContent=
+String(account.status||"pending")
+.toUpperCase();
+
+for(let i=1;i<=4;i++){
+
+loadLevel(i);
+
+}
+
+document.getElementById(
+"referralLink"
+).value=
+createReferralLink();
+
+}
+
+
+/* =========================================
+   REFERRAL LINK
+========================================= */
+
+function createReferralLink(){
+
+const base=
+window.location.origin+
+window.location.pathname
+.replace(
+"dashboard.html",
+"register.html"
+);
+
+return base+
+"?ref="+
+encodeURIComponent(account.username||"");
+
+}
+
+
+/* =========================================
+   COPY
+========================================= */
+
+function copyLink(){
+
+const input=
+document.getElementById("referralLink");
+
+navigator.clipboard.writeText(
+input.value
+).then(function(){
+
+showToast(
+"Referral link copied."
+);
+
+}).catch(function(){
+
+input.select();
+
+document.execCommand("copy");
+
+showToast(
+"Referral link copied."
+);
+
+});
+
+}
+
+
+/* =========================================
+   WITHDRAW
+========================================= */
+
+function requestWithdraw(){
+
+const amount=
+Number(
+document.getElementById(
+"withdrawAmount"
+).value
+);
+
+const phone=
+document.getElementById(
+"withdrawPhone"
+).value
+.trim();
+
+if(!amount || amount<=0){
+
+showToast(
+"Enter a valid amount."
+);
+
+return;
+
+}
+
+if(!phone){
+
+showToast(
+"Enter mobile money number."
+);
+
+return;
+
+}
+
+if(amount>Number(account.balance||0)){
+
+showToast(
+"Insufficient balance."
+);
+
+return;
+
+}
+
+showModal(
+"WITHDRAWAL REQUEST",
+"Request TSh "+
+money(amount)+
+" withdrawal to "+
+phone+"?"
+);
+
+document.getElementById(
+"modalConfirm"
+).onclick=function(){
+
+const requests=
+getWithdrawals();
+
+requests.push({
+
+id:
+"WD-"+Date.now(),
+
+userId:
+account.id,
+
+username:
+account.username,
+
+phone:
+phone,
+
+amount:
+amount,
+
+status:
+"pending",
+
+date:
+new Date().toISOString()
+
+});
+
+localStorage.setItem(
+"cashlickWithdrawals",
+JSON.stringify(requests)
+);
+
+
+/*
+Reduce balance immediately.
+*/
+
+account.balance=
+Number(account.balance||0)-
+amount;
+
+account.withdrawn=
+Number(account.withdrawn||0)+
+amount;
+
+saveAccount();
+
+document.getElementById(
+"withdrawAmount"
+).value="";
+
+document.getElementById(
+"withdrawPhone"
+).value="";
+
+closeModal();
+
+loadDashboard();
+
+showToast(
+"Withdrawal request submitted."
+);
+
+};
+
+}
+
+
+/* =========================================
+   WITHDRAWALS
+========================================= */
+
+function getWithdrawals(){
+
+try{
+
+const saved=
+localStorage.getItem(
+"cashlickWithdrawals"
+);
+
+if(!saved){
+
+return [];
+
+}
+
+const data=JSON.parse(saved);
+
+return Array.isArray(data)?data:[];
+
+}catch(error){
+
+return [];
+
+}
+
+}
+
+
+/* =========================================
+   TEAM
+========================================= */
+
+function toggleTeam(){
+
+document
+.getElementById("teamCard")
+.classList.toggle("open");
+
+}
+
+
+function toggleLevel(level){
+
+document
+.getElementById("level"+level)
+.classList.toggle("open");
+
+}
+
+
+/* =========================================
+   ACCOUNT
+========================================= */
+
+function toggleAccount(){
+
+document
+.getElementById("accountBox")
+.classList.toggle("open");
+
+}
+
+
+function scrollAccount(){
+
+document
+.getElementById("accountBox")
+.scrollIntoView({
+behavior:"smooth",
+block:"center"
+});
+
+}
+
+
+/* =========================================
+   MODAL
+========================================= */
+
+function showModal(title,text){
+
+document.getElementById(
+"modalTitle"
+).textContent=title;
+
+document.getElementById(
+"modalText"
+).textContent=text;
+
+document.getElementById(
+"modal"
+).classList.add("show");
+
+}
+
+
+function closeModal(){
+
+document
+.getElementById("modal")
+.classList.remove("show");
+
+document.getElementById(
+"modalConfirm"
+).onclick=closeModal;
+
+}
+
+
+/* =========================================
+   TOAST
+========================================= */
+
+function showToast(text){
+
+const toast=
+document.getElementById("toast");
+
+toast.textContent=text;
+
+toast.classList.add("show");
+
+setTimeout(function(){
+
+toast.classList.remove("show");
+
+},2500);
+
+}
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+function logout(){
+
+showModal(
+"LOG OUT",
+"Do you want to log out?"
+);
+
+document.getElementById(
+"modalConfirm"
+).onclick=function(){
+
+localStorage.removeItem(
+"cashlickLoggedIn"
+);
+
+localStorage.removeItem(
+"cashlickLoggedInUser"
+);
+
+localStorage.removeItem(
+"cashlickUser"
+);
+
+window.location.href=
+"login.html";
+
+};
+
+}
+
+
+/* =========================================
+   ESCAPE
+========================================= */
+
+function escapeHTML(value){
+
+return String(value)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================
+   MODAL OUTSIDE CLICK
+========================================= */
+
+document
+.getElementById("modal")
+.addEventListener(
+"click",
+function(event){
+
+if(event.target===this){
+
+closeModal();
+
+}
+
+});
+
+
+/* =========================================
+   START
+========================================= */
+
+loadDashboard();
+
+setInterval(function(){
+
+loadDashboard();
+
+},3000);
+
+</script>
+
+</body>
+  </html>
