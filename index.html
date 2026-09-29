@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>CASHLICK</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:#050505;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.container{
+    width:100%;
+    max-width:430px;
+    text-align:center;
+}
+
+.logo{
+    width:82px;
+    height:82px;
+    margin:0 auto 18px;
+    border-radius:24px;
+    background:linear-gradient(
+        145deg,
+        #ffe082,
+        #d4a72c,
+        #8f6b12
+    );
+    color:#080808;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+    font-weight:900;
+    box-shadow:0 10px 35px rgba(212,167,44,.15);
+}
+
+.brand{
+    font-size:30px;
+    font-weight:900;
+    letter-spacing:4px;
+}
+
+.tagline{
+    margin-top:8px;
+    color:#777;
+    font-size:11px;
+    letter-spacing:1px;
+}
+
+.card{
+    margin-top:30px;
+    background:#101010;
+    border:1px solid #292929;
+    border-radius:22px;
+    padding:22px;
+}
+
+.card h1{
+    font-size:20px;
+    margin-bottom:8px;
+}
+
+.card p{
+    color:#777;
+    font-size:11px;
+    line-height:1.6;
+}
+
+.buttons{
+    margin-top:22px;
+    display:grid;
+    gap:10px;
+}
+
+button{
+    width:100%;
+    height:50px;
+    border-radius:13px;
+    font-size:12px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.login{
+    background:linear-gradient(
+        135deg,
+        #ffe082,
+        #d4a72c,
+        #a77b17
+    );
+    color:#080808;
+    border:none;
+}
+
+.register{
+    background:#171717;
+    color:#d4a72c;
+    border:1px solid #3a3018;
+}
+
+.info{
+    margin-top:22px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+}
+
+.info-box{
+    background:#080808;
+    border:1px solid #242424;
+    border-radius:14px;
+    padding:14px 8px;
+}
+
+.info-icon{
+    color:#d4a72c;
+    font-size:19px;
+}
+
+.info-title{
+    margin-top:7px;
+    font-size:10px;
+    font-weight:bold;
+}
+
+.info-text{
+    margin-top:4px;
+    color:#666;
+    font-size:8px;
+}
+
+.footer{
+    margin-top:25px;
+    color:#444;
+    font-size:9px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">
+        CL
+    </div>
+
+    <div class="brand">
+        CASHLICK
+    </div>
+
+    <div class="tagline">
+        CONNECT • REFER • EARN
+    </div>
+
+
+    <div class="card">
+
+        <h1>
+            Welcome to CASHLICK
+        </h1>
+
+        <p>
+            Build your team, earn referral commissions
+            and manage your earnings from one dashboard.
+        </p>
+
+
+        <div class="buttons">
+
+            <button
+                class="login"
+                onclick="goLogin()">
+                LOGIN
+            </button>
+
+
+            <button
+                class="register"
+                onclick="goRegister()">
+                CREATE ACCOUNT
+            </button>
+
+        </div>
+
+
+        <div class="info">
+
+            <div class="info-box">
+
+                <div class="info-icon">
+                    ◎
+                </div>
+
+                <div class="info-title">
+                    MY TEAM
+                </div>
+
+                <div class="info-text">
+                    Levels 1–4
+                </div>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="info-icon">
+                    TSh
+                </div>
+
+                <div class="info-title">
+                    EARNINGS
+                </div>
+
+                <div class="info-text">
+                    Track commissions
+                </div>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="info-icon">
+                    ↓
+                </div>
+
+                <div class="info-title">
+                    WITHDRAW
+                </div>
+
+                <div class="info-text">
+                    Request withdrawal
+                </div>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="info-icon">
+                    🔗
+                </div>
+
+                <div class="info-title">
+                    REFERRALS
+                </div>
+
+                <div class="info-text">
+                    Your personal link
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+        © 2026 CASHLICK
+    </div>
+
+</div>
+
+
+<script>
+
+function goLogin(){
+
+    window.location.href="login.html";
+
+}
+
+
+function goRegister(){
+
+    window.location.href="register.html";
+
+}
+
+</script>
+
+</body>
+</html>
