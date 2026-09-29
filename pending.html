@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>CASHLICK - Pending</title>
+
+<style>
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+min-height:100vh;
+background:#050505;
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+}
+
+.box{
+width:100%;
+max-width:390px;
+background:#101010;
+border:1px solid #292929;
+border-radius:24px;
+padding:27px 20px;
+text-align:center;
+}
+
+.logo{
+width:58px;
+height:58px;
+margin:0 auto 14px;
+border-radius:17px;
+background:linear-gradient(145deg,#ffe082,#d4a72c,#8f6b12);
+color:#050505;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:900;
+font-size:19px;
+}
+
+.brand{
+font-size:24px;
+font-weight:900;
+letter-spacing:3px;
+}
+
+.subtitle{
+color:#777;
+font-size:10px;
+margin-top:5px;
+}
+
+.icon{
+width:70px;
+height:70px;
+margin:27px auto 15px;
+border-radius:50%;
+background:rgba(212,167,44,.08);
+border:1px solid rgba(212,167,44,.25);
+display:flex;
+align-items:center;
+justify-content:center;
+color:#d4a72c;
+font-size:30px;
+}
+
+h1{
+font-size:20px;
+}
+
+.text{
+margin-top:9px;
+color:#777;
+font-size:11px;
+line-height:1.6;
+}
+
+.user-card{
+margin-top:20px;
+background:#080808;
+border:1px solid #252525;
+border-radius:15px;
+padding:15px;
+text-align:left;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+gap:10px;
+padding:9px 0;
+border-bottom:1px solid #1d1d1d;
+}
+
+.row:last-child{
+border-bottom:none;
+}
+
+.row span:first-child{
+color:#666;
+font-size:10px;
+}
+
+.row span:last-child{
+color:#ddd;
+font-size:10px;
+text-align:right;
+}
+
+.status{
+color:#d4a72c !important;
+font-weight:bold;
+}
+
+.buttons{
+margin-top:18px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+}
+
+.btn{
+height:44px;
+border-radius:11px;
+font-size:10px;
+font-weight:900;
+cursor:pointer;
+}
+
+.login{
+background:#181818;
+border:1px solid #303030;
+color:#aaa;
+}
+
+.logout{
+background:#160909;
+border:1px solid #392222;
+color:#ff7777;
+}
+
+.footer{
+margin-top:21px;
+color:#444;
+font-size:9px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<div class="logo">CL</div>
+
+<div class="brand">CASHLICK</div>
+
+<div class="subtitle">
+AFFILIATE MARKETING PLATFORM
+</div>
+
+<div class="icon">
+⏳
+</div>
+
+<h1>
+ACCOUNT PENDING
+</h1>
+
+<div class="text">
+Your account has been created successfully.
+Please wait for CEO activation before accessing
+your member dashboard.
+</div>
+
+<div class="user-card">
+
+<div class="row">
+<span>Username</span>
+<span id="username">-</span>
+</div>
+
+<div class="row">
+<span>Full Name</span>
+<span id="fullname">-</span>
+</div>
+
+<div class="row">
+<span>Phone</span>
+<span id="phone">-</span>
+</div>
+
+<div class="row">
+<span>Status</span>
+<span class="status" id="status">
+PENDING
+</span>
+</div>
+
+</div>
+
+<div class="buttons">
+
+<button
+class="btn login"
+onclick="checkAccount()"
+>
+CHECK STATUS
+</button>
+
+<button
+class="btn logout"
+onclick="logout()"
+>
+LOG OUT
+</button>
+
+</div>
+
+<div class="footer">
+© 2026 CASHLICK
+</div>
+
+</div>
+
+<script>
+
+/* =========================================
+   CURRENT USER
+========================================= */
+
+function getCurrentUser(){
+
+try{
+
+const saved =
+localStorage.getItem(
+"cashlickUser"
+);
+
+if(saved){
+
+return JSON.parse(saved);
+
+}
+
+}catch(error){}
+
+return null;
+
+}
+
+
+/* =========================================
+   ACCOUNTS
+========================================= */
+
+function getAccounts(){
+
+try{
+
+const saved =
+localStorage.getItem(
+"cashlickAccounts"
+);
+
+if(!saved){
+
+return [];
+
+}
+
+const accounts =
+JSON.parse(saved);
+
+return Array.isArray(accounts)
+?accounts
+:[];
+
+}catch(error){
+
+return [];
+
+}
+
+}
+
+
+/* =========================================
+   FIND UPDATED USER
+========================================= */
+
+function findCurrentUser(){
+
+const current =
+getCurrentUser();
+
+if(!current){
+
+return null;
+
+}
+
+const accounts =
+getAccounts();
+
+const found =
+accounts.find(function(user){
+
+return String(user.id) ===
+String(current.id);
+
+});
+
+
+return found || current;
+
+}
+
+
+/* =========================================
+   LOAD
+========================================= */
+
+function loadUser(){
+
+const user =
+findCurrentUser();
+
+if(!user){
+
+window.location.href =
+"login.html";
+
+return;
+
+}
+
+
+/*
+SYNC CURRENT USER
+*/
+
+localStorage.setItem(
+"cashlickUser",
+JSON.stringify(user)
+);
+
+
+document.getElementById(
+"username"
+).textContent =
+user.username || "-";
+
+
+document.getElementById(
+"fullname"
+).textContent =
+user.fullname ||
+user.fullName ||
+"-";
+
+
+document.getElementById(
+"phone"
+).textContent =
+user.phone || "-";
+
+
+const status =
+String(
+user.status || "pending"
+)
+.toLowerCase();
+
+
+/*
+=========================================
+ACTIVATED
+=========================================
+*/
+
+if(
+status === "active" ||
+status === "activated"
+){
+
+document.getElementById(
+"status"
+).textContent =
+"ACTIVATED";
+
+document.getElementById(
+"status"
+).style.color =
+"#62df91";
+
+
+setTimeout(function(){
+
+window.location.href =
+"dashboard.html";
+
+},700);
+
+return;
+
+}
+
+
+/*
+=========================================
+REJECTED
+=========================================
+*/
+
+if(status === "rejected"){
+
+document.getElementById(
+"status"
+).textContent =
+"REJECTED";
+
+document.getElementById(
+"status"
+).style.color =
+"#ff7777";
+
+return;
+
+}
+
+
+/*
+=========================================
+PENDING
+=========================================
+*/
+
+document.getElementById(
+"status"
+).textContent =
+"PENDING";
+
+}
+
+
+/* =========================================
+   CHECK STATUS
+========================================= */
+
+function checkAccount(){
+
+loadUser();
+
+}
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+function logout(){
+
+localStorage.removeItem(
+"cashlickLoggedIn"
+);
+
+localStorage.removeItem(
+"cashlickLoggedInUser"
+);
+
+localStorage.removeItem(
+"cashlickUser"
+);
+
+window.location.href =
+"login.html";
+
+}
+
+
+/* =========================================
+   START
+========================================= */
+
+loadUser();
+
+
+/*
+Automatically check whether CEO
+has activated the account.
+*/
+
+setInterval(function(){
+
+loadUser();
+
+},2000);
+
+</script>
+
+</body>
+</html>
